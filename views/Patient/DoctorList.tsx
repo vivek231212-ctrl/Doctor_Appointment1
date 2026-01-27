@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useGlobal } from '../../store';
 import { OPDStatus, TokenStatus } from '../../types';
 
-export const DoctorList: React.FC<{ onSelect: (id: string) => void }> = ({ onSelect }) => {
+export const DoctorList: React.FC<{ onSelect: (id: string) => void; onBook: (id: string) => void }> = ({ onSelect, onBook }) => {
   const { doctors, tokens, logout } = useGlobal();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -76,7 +76,11 @@ export const DoctorList: React.FC<{ onSelect: (id: string) => void }> = ({ onSel
                 key={doc.id}
                 className="bg-white p-5 rounded-[28px] shadow-sm border border-gray-50 relative"
               >
-                <div className="flex gap-4">
+                {/* Clickable Header Section (Avatar + Info) */}
+                <div 
+                  className="flex gap-4 cursor-pointer active:opacity-70 transition-opacity"
+                  onClick={() => onSelect(doc.id)}
+                >
                   {/* Avatar */}
                   <div className="shrink-0">
                     <div className="w-[86px] h-[86px] rounded-full overflow-hidden border-2 border-blue-50/50">
@@ -126,7 +130,7 @@ export const DoctorList: React.FC<{ onSelect: (id: string) => void }> = ({ onSel
                     )}
                   </div>
                   <button 
-                    onClick={() => onSelect(doc.id)}
+                    onClick={() => onBook(doc.id)}
                     className={`px-9 py-4 rounded-[16px] font-bold text-[16px] transition-all active:scale-[0.98] ${isOpen ? 'bg-[#0066FF] text-white shadow-[0_6px_15px_-4px_rgba(0,102,255,0.4)]' : 'bg-[#F1F5F9] text-[#94A3B8]'}`}
                   >
                     Book Token

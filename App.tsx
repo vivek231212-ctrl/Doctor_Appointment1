@@ -44,7 +44,11 @@ const Main: React.FC = () => {
             onSelect={(id) => {
               setSelectedDocId(id);
               setView('PROFILE');
-            }} 
+            }}
+            onBook={(id) => {
+              setSelectedDocId(id);
+              setView('BOOKING');
+            }}
           />
         );
       case 'PROFILE':
@@ -59,14 +63,14 @@ const Main: React.FC = () => {
         return (
           <Booking 
             doctorId={selectedDocId!} 
-            onBack={() => setView('PROFILE')} 
+            onBack={() => setView('LIST')} 
             onBooked={() => setView('TRACKER')} 
           />
         );
       case 'TRACKER':
         return <LiveTracker onBack={() => setView('LIST')} />;
       default:
-        return <DoctorList onSelect={() => {}} />;
+        return <DoctorList onSelect={() => {}} onBook={() => {}} />;
     }
   };
 
