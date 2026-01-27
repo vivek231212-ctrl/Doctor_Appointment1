@@ -4,13 +4,14 @@ import { GlobalProvider, useGlobal } from './store';
 import { Landing } from './views/Landing';
 import { Login } from './views/Login';
 import { DoctorList } from './views/Patient/DoctorList';
+import { DoctorProfile } from './views/Patient/DoctorProfile';
 import { Booking } from './views/Patient/Booking';
 import { LiveTracker } from './views/Patient/LiveTracker';
 import { DoctorDashboard } from './views/Doctor/Dashboard';
 
 const Main: React.FC = () => {
   const { currentUser } = useGlobal();
-  const [view, setView] = useState<'LANDING' | 'LOGIN' | 'LIST' | 'BOOKING' | 'TRACKER'>('LANDING');
+  const [view, setView] = useState<'LANDING' | 'LOGIN' | 'LIST' | 'PROFILE' | 'BOOKING' | 'TRACKER'>('LANDING');
   const [selectedRole, setSelectedRole] = useState<'PATIENT' | 'DOCTOR'>('PATIENT');
   const [selectedDocId, setSelectedDocId] = useState<string | null>(null);
 
@@ -33,7 +34,7 @@ const Main: React.FC = () => {
       return <DoctorDashboard />;
     }
 
-    // Patient Views
+    // Patient Views navigation normalization
     const currentPatientView = view === 'LANDING' || view === 'LOGIN' ? 'LIST' : view;
 
     switch (currentPatientView) {
@@ -42,15 +43,23 @@ const Main: React.FC = () => {
           <DoctorList 
             onSelect={(id) => {
               setSelectedDocId(id);
-              setView('BOOKING');
+              setView('PROFILE');
             }} 
+          />
+        );
+      case 'PROFILE':
+        return (
+          <DoctorProfile
+            doctorId={selectedDocId!}
+            onBack={() => setView('LIST')}
+            onBook={() => setView('BOOKING')}
           />
         );
       case 'BOOKING':
         return (
           <Booking 
             doctorId={selectedDocId!} 
-            onBack={() => setView('LIST')} 
+            onBack={() => setView('PROFILE')} 
             onBooked={() => setView('TRACKER')} 
           />
         );

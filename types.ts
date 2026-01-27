@@ -33,6 +33,14 @@ export interface Doctor extends User {
   rating: number;
   reviews: number;
   cabinNo?: string;
+  // New fields for Profile UI
+  about: string;
+  patientsCount: string;
+  reviewsCount: string;
+  consultationFee: number;
+  originalFee: number;
+  address: string;
+  locationName: string;
 }
 
 export interface Token {

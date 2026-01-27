@@ -29,26 +29,40 @@ const INITIAL_DOCTORS: Doctor[] = [
     hospital: 'City Children Hospital',
     avgConsultationTime: 10,
     currentOPDStatus: OPDStatus.ACTIVE,
-    image: 'https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&q=80&w=200&h=200',
+    image: 'https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&q=80&w=400&h=400',
     experience: 10,
     rating: 4.9,
     reviews: 124,
-    cabinNo: '04'
+    cabinNo: '04',
+    about: 'Dr. Sarah Johnson is a dedicated pediatrician with over 10 years of experience in child healthcare. She is known for her compassionate approach and specialized expertise in neonatal care.',
+    patientsCount: '3.2K+',
+    reviewsCount: '124',
+    consultationFee: 50.00,
+    originalFee: 75.00,
+    address: '456 Pediatric Lane, Suite 101, IL 60612',
+    locationName: 'City Children Hospital, East Wing'
   },
   {
-    id: 'doc2',
-    name: 'Dr. Michael Chen',
-    phone: '9999999992',
+    id: 'doc4',
+    name: 'Dr. Alexander Bennett',
+    phone: '9999999994',
     role: 'DOCTOR',
     specialty: 'Cardiologist',
-    hospital: 'St. Mary Heart Center',
+    hospital: 'City Medical Center',
     avgConsultationTime: 15,
-    currentOPDStatus: OPDStatus.PAUSED,
-    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=200&h=200',
+    currentOPDStatus: OPDStatus.ACTIVE,
+    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=400',
     experience: 15,
-    rating: 4.8,
-    reviews: 98,
-    cabinNo: '02'
+    rating: 4.9,
+    reviews: 1800,
+    cabinNo: '04',
+    about: 'Dr. Alexander Bennett is a senior cardiologist specializing in interventional cardiology and heart failure management. He is committed to providing evidence-based, compassionate care for complex cardiac conditions with a focus on patient wellness.',
+    patientsCount: '4.5K+',
+    reviewsCount: '1.8K',
+    consultationFee: 75.00,
+    originalFee: 100.00,
+    address: '122 Medical Plaza, Suite 405, IL 60611',
+    locationName: 'City Medical Center, North Wing'
   },
   {
     id: 'doc3',
@@ -59,26 +73,18 @@ const INITIAL_DOCTORS: Doctor[] = [
     hospital: 'Downtown Medical',
     avgConsultationTime: 12,
     currentOPDStatus: OPDStatus.ACTIVE,
-    image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=200&h=200',
+    image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=400&h=400',
     experience: 8,
     rating: 4.7,
     reviews: 210,
-    cabinNo: '07'
-  },
-  {
-    id: 'doc4',
-    name: 'Dr. Julian Moore',
-    phone: '9999999994',
-    role: 'DOCTOR',
-    specialty: 'Cardiologist',
-    hospital: 'City Heart Hospital',
-    avgConsultationTime: 15,
-    currentOPDStatus: OPDStatus.ACTIVE,
-    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=200&h=200',
-    experience: 12,
-    rating: 4.9,
-    reviews: 156,
-    cabinNo: '04'
+    cabinNo: '07',
+    about: 'Dr. Emily White offers comprehensive primary care services. She focuses on preventative medicine and wellness programs for patients of all ages.',
+    patientsCount: '2.1K+',
+    reviewsCount: '210',
+    consultationFee: 40.00,
+    originalFee: 60.00,
+    address: '789 Downtown Way, IL 60610',
+    locationName: 'Downtown Medical Plaza'
   }
 ];
 
@@ -110,7 +116,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   const login = (phone: string, role: 'PATIENT' | 'DOCTOR') => {
     if (role === 'DOCTOR') {
-      const doc = doctors.find(d => d.phone === phone || d.phone === "9999999994"); // Fallback for the new doc
+      const doc = doctors.find(d => d.phone === phone || d.phone === "9999999994");
       if (doc) setCurrentUser(doc);
       else alert("Doctor not found!");
     } else {
