@@ -8,52 +8,78 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --app-width: 390px;
+            --app-height: 844px;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
+            background-color: #f0f2f5;
+            background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+            background-size: 20px 20px;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            /* Allow body to scroll if the window is smaller than the app height */
+            overflow: auto; 
         }
+
         #root {
-            width: 390px;
-            height: 844px;
+            width: var(--app-width);
+            height: var(--app-height);
+            min-width: var(--app-width);
+            min-height: var(--app-height);
             background-color: white;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 12px #ffffff;
+            border-radius: 40px; /* Optional slight rounding for "phone" look, but UI inside stays square if needed */
             position: relative;
+            overflow: hidden; /* Contains the scrollable children */
+            display: flex;
+            flex-direction: column;
+            margin: 40px auto; /* Safe margins for desktop view */
+        }
+
+        /* Ensure internal views can scroll but the main container stays locked */
+        .app-view {
+            flex: 1;
             overflow-y: auto;
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
         }
+
         /* Custom Scrollbar */
-        #root::-webkit-scrollbar {
+        #root ::-webkit-scrollbar {
             width: 4px;
         }
-        #root::-webkit-scrollbar-thumb {
+        #root ::-webkit-scrollbar-thumb {
             background-color: #E5E7EB;
             border-radius: 10px;
         }
+
+        /* Prevent system zooming */
+        * {
+            touch-action: manipulation;
+        }
     </style>
     <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.2.4",
-    "react-dom": "https://esm.sh/react-dom@^19.2.4",
-    "react-dom/client": "https://esm.sh/react-dom@^19.2.4/client",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "react/": "https://esm.sh/react@^19.2.4/"
-  }
-}
-</script>
+    {
+      "imports": {
+        "react": "https://esm.sh/react@^19.2.4",
+        "react-dom": "https://esm.sh/react-dom@^19.2.4",
+        "react-dom/client": "https://esm.sh/react-dom@^19.2.4/client",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+        "react/": "https://esm.sh/react@^19.2.4/"
+      }
+    }
+    </script>
 </head>
 <body>
     <div id="root"></div>
-    <!-- Explicitly load the entry point -->
     <script type="module" src="index.tsx"></script>
 </body>
 </html>

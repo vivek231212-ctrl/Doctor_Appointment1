@@ -9,7 +9,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ title, onBack, rightAction }) => {
   return (
-    <div className="flex items-center justify-between px-6 py-4 bg-white border-b border-gray-100 sticky top-0 z-10 h-[64px]">
+    <div className="flex items-center justify-between px-6 py-4 bg-white border-b border-gray-100 sticky top-0 z-10 h-[64px] shrink-0">
       <div className="flex items-center gap-4">
         {onBack && (
           <button onClick={onBack} className="p-2 -ml-2 hover:bg-gray-50 rounded-full transition-colors">
@@ -18,9 +18,9 @@ export const Header: React.FC<HeaderProps> = ({ title, onBack, rightAction }) =>
             </svg>
           </button>
         )}
-        <h1 className="text-xl font-semibold text-gray-900">{title}</h1>
+        <h1 className="text-xl font-semibold text-gray-900 truncate max-w-[200px]">{title}</h1>
       </div>
-      {rightAction && <div>{rightAction}</div>}
+      {rightAction && <div className="shrink-0">{rightAction}</div>}
     </div>
   );
 };
@@ -49,7 +49,7 @@ export const Button: React.FC<{
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`py-4 px-6 rounded-2xl font-semibold text-base transition-all active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2 ${variants[variant]} ${className}`}
+      className={`py-4 px-6 rounded-2xl font-semibold text-base transition-all active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2 shrink-0 ${variants[variant]} ${className}`}
     >
       {children}
     </button>

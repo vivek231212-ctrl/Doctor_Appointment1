@@ -14,50 +14,58 @@ const Main: React.FC = () => {
   const [selectedRole, setSelectedRole] = useState<'PATIENT' | 'DOCTOR'>('PATIENT');
   const [selectedDocId, setSelectedDocId] = useState<string | null>(null);
 
-  if (!currentUser) {
-    if (view === 'LANDING') {
-      return (
-        <Landing 
-          onSelectRole={(role) => {
-            setSelectedRole(role);
-            setView('LOGIN');
-          }} 
-        />
-      );
+  const renderContent = () => {
+    if (!currentUser) {
+      if (view === 'LANDING') {
+        return (
+          <Landing 
+            onSelectRole={(role) => {
+              setSelectedRole(role);
+              setView('LOGIN');
+            }} 
+          />
+        );
+      }
+      return <Login initialRole={selectedRole} onBack={() => setView('LANDING')} />;
     }
-    return <Login initialRole={selectedRole} onBack={() => setView('LANDING')} />;
-  }
 
-  if (currentUser.role === 'DOCTOR') {
-    return <DoctorDashboard />;
-  }
+    if (currentUser.role === 'DOCTOR') {
+      return <DoctorDashboard />;
+    }
 
-  // Patient Views (normalized view state for logged in user)
-  const currentPatientView = view === 'LANDING' || view === 'LOGIN' ? 'LIST' : view;
+    // Patient Views
+    const currentPatientView = view === 'LANDING' || view === 'LOGIN' ? 'LIST' : view;
 
-  switch (currentPatientView) {
-    case 'LIST':
-      return (
-        <DoctorList 
-          onSelect={(id) => {
-            setSelectedDocId(id);
-            setView('BOOKING');
-          }} 
-        />
-      );
-    case 'BOOKING':
-      return (
-        <Booking 
-          doctorId={selectedDocId!} 
-          onBack={() => setView('LIST')} 
-          onBooked={() => setView('TRACKER')} 
-        />
-      );
-    case 'TRACKER':
-      return <LiveTracker onBack={() => setView('LIST')} />;
-    default:
-      return <DoctorList onSelect={() => {}} />;
-  }
+    switch (currentPatientView) {
+      case 'LIST':
+        return (
+          <DoctorList 
+            onSelect={(id) => {
+              setSelectedDocId(id);
+              setView('BOOKING');
+            }} 
+          />
+        );
+      case 'BOOKING':
+        return (
+          <Booking 
+            doctorId={selectedDocId!} 
+            onBack={() => setView('LIST')} 
+            onBooked={() => setView('TRACKER')} 
+          />
+        );
+      case 'TRACKER':
+        return <LiveTracker onBack={() => setView('LIST')} />;
+      default:
+        return <DoctorList onSelect={() => {}} />;
+    }
+  };
+
+  return (
+    <div className="flex flex-col h-full w-full">
+      {renderContent()}
+    </div>
+  );
 };
 
 const App: React.FC = () => {
