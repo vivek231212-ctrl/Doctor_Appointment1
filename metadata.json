@@ -1,0 +1,8 @@
+{
+  "name": "StitchHealth Token Booking",
+  "description": "A high-fidelity mobile-only doctor appointment booking system with real-time token tracking and dynamic ETA calculation.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
