@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MedToken - StitchHealth</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --app-width: 390px;
@@ -15,17 +15,14 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5;
-            background-image: radial-gradient(#d1d5db 1px, transparent 1px);
-            background-size: 20px 20px;
+            background-color: #f1f5f9;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            /* Allow body to scroll if the window is smaller than the app height */
-            overflow: auto; 
+            overflow: hidden; /* Prevent body scroll, only app scrolls */
         }
 
         #root {
@@ -34,36 +31,43 @@
             min-width: var(--app-width);
             min-height: var(--app-height);
             background-color: white;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 12px #ffffff;
-            border-radius: 40px; /* Optional slight rounding for "phone" look, but UI inside stays square if needed */
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.15), 0 0 0 10px #ffffff;
+            border-radius: 44px;
             position: relative;
-            overflow: hidden; /* Contains the scrollable children */
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            margin: 40px auto; /* Safe margins for desktop view */
+            transform-origin: center;
         }
 
-        /* Ensure internal views can scroll but the main container stays locked */
-        .app-view {
-            flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
+        /* Container for scrollable content */
+        .app-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
 
-        /* Custom Scrollbar */
-        #root ::-webkit-scrollbar {
-            width: 4px;
-        }
-        #root ::-webkit-scrollbar-thumb {
-            background-color: #E5E7EB;
-            border-radius: 10px;
-        }
-
-        /* Prevent system zooming */
+        /* Prevent system zooming and text selection */
         * {
             touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Custom Scrollbar for the app's internal scroll */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
         }
     </style>
     <script type="importmap">
