@@ -51,12 +51,19 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   // Simulation of persistent data
   useEffect(() => {
-    const savedTokens = localStorage.getItem('app_tokens');
-    if (savedTokens) setTokens(JSON.parse(savedTokens));
-    const savedDocs = localStorage.getItem('app_doctors');
-    if (savedDocs) setDoctors(JSON.parse(savedDocs));
-    const savedUser = localStorage.getItem('app_user');
-    if (savedUser) setCurrentUser(JSON.parse(savedUser));
+    try {
+      const savedTokens = localStorage.getItem('app_tokens');
+      if (savedTokens && savedTokens !== 'undefined') setTokens(JSON.parse(savedTokens));
+      
+      const savedDocs = localStorage.getItem('app_doctors');
+      if (savedDocs && savedDocs !== 'undefined') setDoctors(JSON.parse(savedDocs));
+      
+      const savedUser = localStorage.getItem('app_user');
+      if (savedUser && savedUser !== 'undefined') setCurrentUser(JSON.parse(savedUser));
+    } catch (e) {
+      console.error("Failed to load state from localStorage", e);
+      // Fallback to defaults on error
+    }
   }, []);
 
   useEffect(() => {
@@ -146,8 +153,6 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
 
     if (doc.currentOPDStatus === OPDStatus.PAUSED) {
-      // Logic for pause: basically push it further or just return a "Paused" flag.
-      // For calculation, we'll just say it adds 999 to show it's paused in UI.
       return -1; 
     }
 
