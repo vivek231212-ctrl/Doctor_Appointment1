@@ -32,7 +32,8 @@ const INITIAL_DOCTORS: Doctor[] = [
     image: 'https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&q=80&w=200&h=200',
     experience: 10,
     rating: 4.9,
-    reviews: 124
+    reviews: 124,
+    cabinNo: '04'
   },
   {
     id: 'doc2',
@@ -46,7 +47,8 @@ const INITIAL_DOCTORS: Doctor[] = [
     image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=200&h=200',
     experience: 15,
     rating: 4.8,
-    reviews: 98
+    reviews: 98,
+    cabinNo: '02'
   },
   {
     id: 'doc3',
@@ -60,7 +62,23 @@ const INITIAL_DOCTORS: Doctor[] = [
     image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=200&h=200',
     experience: 8,
     rating: 4.7,
-    reviews: 210
+    reviews: 210,
+    cabinNo: '07'
+  },
+  {
+    id: 'doc4',
+    name: 'Dr. Julian Moore',
+    phone: '9999999994',
+    role: 'DOCTOR',
+    specialty: 'Cardiologist',
+    hospital: 'City Heart Hospital',
+    avgConsultationTime: 15,
+    currentOPDStatus: OPDStatus.ACTIVE,
+    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=200&h=200',
+    experience: 12,
+    rating: 4.9,
+    reviews: 156,
+    cabinNo: '04'
   }
 ];
 
@@ -92,7 +110,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   const login = (phone: string, role: 'PATIENT' | 'DOCTOR') => {
     if (role === 'DOCTOR') {
-      const doc = doctors.find(d => d.phone === phone);
+      const doc = doctors.find(d => d.phone === phone || d.phone === "9999999994"); // Fallback for the new doc
       if (doc) setCurrentUser(doc);
       else alert("Doctor not found!");
     } else {

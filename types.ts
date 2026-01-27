@@ -32,6 +32,7 @@ export interface Doctor extends User {
   experience: number;
   rating: number;
   reviews: number;
+  cabinNo?: string;
 }
 
 export interface Token {
