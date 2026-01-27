@@ -22,25 +22,45 @@ const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 const INITIAL_DOCTORS: Doctor[] = [
   {
     id: 'doc1',
-    name: 'Dr. Sarah Wilson',
+    name: 'Dr. Sarah Johnson',
     phone: '9999999991',
     role: 'DOCTOR',
     specialty: 'Pediatrician',
     hospital: 'City Children Hospital',
     avgConsultationTime: 10,
-    currentOPDStatus: OPDStatus.CLOSED,
-    image: 'https://picsum.photos/seed/doc1/200/200'
+    currentOPDStatus: OPDStatus.ACTIVE,
+    image: 'https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&q=80&w=200&h=200',
+    experience: 10,
+    rating: 4.9,
+    reviews: 124
   },
   {
     id: 'doc2',
-    name: 'Dr. James Anderson',
+    name: 'Dr. Michael Chen',
     phone: '9999999992',
     role: 'DOCTOR',
     specialty: 'Cardiologist',
     hospital: 'St. Mary Heart Center',
     avgConsultationTime: 15,
-    currentOPDStatus: OPDStatus.CLOSED,
-    image: 'https://picsum.photos/seed/doc2/200/200'
+    currentOPDStatus: OPDStatus.PAUSED,
+    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=200&h=200',
+    experience: 15,
+    rating: 4.8,
+    reviews: 98
+  },
+  {
+    id: 'doc3',
+    name: 'Dr. Emily White',
+    phone: '9999999993',
+    role: 'DOCTOR',
+    specialty: 'General Physician',
+    hospital: 'Downtown Medical',
+    avgConsultationTime: 12,
+    currentOPDStatus: OPDStatus.ACTIVE,
+    image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=200&h=200',
+    experience: 8,
+    rating: 4.7,
+    reviews: 210
   }
 ];
 
@@ -49,7 +69,6 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [doctors, setDoctors] = useState<Doctor[]>(INITIAL_DOCTORS);
   const [tokens, setTokens] = useState<Token[]>([]);
 
-  // Simulation of persistent data
   useEffect(() => {
     try {
       const savedTokens = localStorage.getItem('app_tokens');
@@ -62,7 +81,6 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       if (savedUser && savedUser !== 'undefined') setCurrentUser(JSON.parse(savedUser));
     } catch (e) {
       console.error("Failed to load state from localStorage", e);
-      // Fallback to defaults on error
     }
   }, []);
 
@@ -87,7 +105,6 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const bookToken = (doctorId: string) => {
     if (!currentUser) return null;
     
-    // Check if already booked
     const existing = tokens.find(t => t.doctorId === doctorId && t.patientId === currentUser.id && t.status !== TokenStatus.COMPLETED);
     if (existing) {
       alert("You already have an active token for this doctor!");

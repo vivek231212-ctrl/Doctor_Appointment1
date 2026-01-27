@@ -29,6 +29,9 @@ export interface Doctor extends User {
   currentOPDStatus: OPDStatus;
   broadcastMessage?: string;
   image: string;
+  experience: number;
+  rating: number;
+  reviews: number;
 }
 
 export interface Token {
