@@ -13,7 +13,6 @@ export const Login: React.FC<LoginProps> = ({ initialRole, onBack }) => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [isOtpSent, setIsOtpSent] = useState(false);
-  const [authMode, setAuthMode] = useState<'LOGIN' | 'SIGNUP'>('LOGIN');
   const [otp, setOtp] = useState(['', '', '', '']);
   const otpRefs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
@@ -193,21 +192,6 @@ export const Login: React.FC<LoginProps> = ({ initialRole, onBack }) => {
           <p className="text-[#64748B] text-center mb-10 leading-relaxed px-4 text-base">
             Manage appointments and track tokens in real-time.
           </p>
-
-          <div className="w-full bg-[#E5E7EB] p-1 rounded-[14px] flex mb-8">
-            <button
-              onClick={() => setAuthMode('LOGIN')}
-              className={`flex-1 py-2.5 text-sm font-semibold rounded-[12px] transition-all ${authMode === 'LOGIN' ? 'bg-white shadow-sm text-gray-900' : 'text-[#6B7280]'}`}
-            >
-              Login
-            </button>
-            <button
-              onClick={() => setAuthMode('SIGNUP')}
-              className={`flex-1 py-2.5 text-sm font-semibold rounded-[12px] transition-all ${authMode === 'SIGNUP' ? 'bg-white shadow-sm text-gray-900' : 'text-[#6B7280]'}`}
-            >
-              Sign Up
-            </button>
-          </div>
 
           <div className="w-full space-y-5 mb-8">
             <div className="flex flex-col gap-2.5">
