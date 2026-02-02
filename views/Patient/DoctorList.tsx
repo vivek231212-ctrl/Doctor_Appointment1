@@ -26,7 +26,7 @@ export const DoctorList: React.FC<{ onSelect: (id: string) => void; onBook: (id:
             <path d="m15 18-6-6 6-6"/>
           </svg>
         </button>
-        <h1 className="text-xl font-bold text-[#111827]">Find a Doctor</h1>
+        <h1 className="text-xl font-black text-[#111827]">Find a Doctor</h1>
         <button className="p-1 text-gray-900">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="21" y1="4" x2="14" y2="4"/><line x1="10" y1="4" x2="3" y2="4"/><circle cx="12" cy="4" r="2"/><line x1="21" y1="12" x2="16" y2="12"/><line x1="12" y1="12" x2="3" y2="12"/><circle cx="14" cy="12" r="2"/><line x1="21" y1="20" x2="12" y2="20"/><line x1="8" y1="20" x2="3" y2="20"/><circle cx="10" cy="20" r="2"/>
@@ -57,7 +57,7 @@ export const DoctorList: React.FC<{ onSelect: (id: string) => void; onBook: (id:
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-7 py-3 rounded-full font-semibold text-[15px] transition-all border ${selectedCategory === cat ? 'bg-[#0066FF] text-white border-[#0066FF]' : 'bg-white text-[#64748B] border-gray-100 shadow-sm'}`}
+              className={`px-7 py-3 rounded-full font-bold text-[15px] transition-all border ${selectedCategory === cat ? 'bg-[#0066FF] text-white border-[#0066FF]' : 'bg-white text-[#64748B] border-gray-100 shadow-sm'}`}
             >
               {cat}
             </button>
@@ -92,15 +92,15 @@ export const DoctorList: React.FC<{ onSelect: (id: string) => void; onBook: (id:
                   <div className="flex-1">
                     <div className="flex items-start justify-between">
                       <div className="flex-1 pr-2">
-                        <h4 className="font-bold text-[#111827] text-[18px] leading-tight">{doc.name}</h4>
-                        <p className="text-[#64748B] text-[14px] mt-1 font-medium">
+                        <h4 className="font-black text-[#111827] text-[18px] leading-tight">{doc.name}</h4>
+                        <p className="text-[#64748B] text-[14px] mt-1 font-bold">
                           {doc.specialty} • {doc.experience} years exp.
                         </p>
                       </div>
                       {/* Status Badge */}
                       <span className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[10px] font-black tracking-wider ${isOpen ? 'bg-[#F0FDF4] text-[#22C55E]' : 'bg-[#FFF7ED] text-[#F97316]'}`}>
                         <span className={`w-2 h-2 rounded-full ${isOpen ? 'bg-[#22C55E]' : 'bg-[#F97316]'}`} />
-                        {isOpen ? 'OPEN' : 'ON BREAK'}
+                        {isOpen ? 'OPEN' : 'BREAK'}
                       </span>
                     </div>
                     
@@ -108,8 +108,8 @@ export const DoctorList: React.FC<{ onSelect: (id: string) => void; onBook: (id:
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="#FACC15">
                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                       </svg>
-                      <span className="text-[14px] font-bold text-[#111827]">{doc.rating}</span>
-                      <span className="text-[14px] text-[#94A3B8] font-medium">({doc.reviews} reviews)</span>
+                      <span className="text-[14px] font-black text-[#111827]">{doc.rating}</span>
+                      <span className="text-[14px] text-[#94A3B8] font-bold">({doc.reviews} reviews)</span>
                     </div>
                   </div>
                 </div>
@@ -119,19 +119,19 @@ export const DoctorList: React.FC<{ onSelect: (id: string) => void; onBook: (id:
                   <div className="flex flex-col">
                     {isOpen ? (
                       <>
-                        <p className="text-[10px] font-black text-[#94A3B8] uppercase tracking-[0.1em] mb-1">CURRENT TOKEN</p>
+                        <p className="text-[10px] font-black text-[#94A3B8] uppercase tracking-[0.1em] mb-1">SERVING</p>
                         <p className="text-[#0066FF] font-black text-[22px] leading-none">#{activeToken?.tokenNumber || (doc.id === 'doc1' ? '14' : '08')}</p>
                       </>
                     ) : (
                       <>
-                        <p className="text-[10px] font-black text-[#94A3B8] uppercase tracking-[0.1em] mb-1">EST. WAIT</p>
-                        <p className="text-[#F97316] font-black text-[22px] leading-none">45 mins</p>
+                        <p className="text-[10px] font-black text-[#94A3B8] uppercase tracking-[0.1em] mb-1">WAIT</p>
+                        <p className="text-[#F97316] font-black text-[22px] leading-none">45m</p>
                       </>
                     )}
                   </div>
                   <button 
                     onClick={() => onBook(doc.id)}
-                    className={`px-9 py-4 rounded-[16px] font-bold text-[16px] transition-all active:scale-[0.98] ${isOpen ? 'bg-[#0066FF] text-white shadow-[0_6px_15px_-4px_rgba(0,102,255,0.4)]' : 'bg-[#F1F5F9] text-[#94A3B8]'}`}
+                    className={`px-8 py-4 rounded-[16px] font-black text-[15px] transition-all active:scale-[0.98] ${isOpen ? 'bg-[#0066FF] text-white shadow-[0_6px_15px_-4px_rgba(0,102,255,0.4)]' : 'bg-[#F1F5F9] text-[#94A3B8]'}`}
                   >
                     Book Token
                   </button>
@@ -150,31 +150,31 @@ export const DoctorList: React.FC<{ onSelect: (id: string) => void; onBook: (id:
       </button>
 
       {/* Bottom Navigation - Absolute to parent */}
-      <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-50 h-[88px] px-10 flex items-center justify-between z-30 rounded-b-[44px]">
+      <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-50 h-[88px] px-10 flex items-center justify-between z-30 rounded-b-[48px]">
         <button className="flex flex-col items-center gap-1.5">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="#0066FF">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/>
           </svg>
-          <span className="text-[11px] font-bold text-[#0066FF]">Home</span>
+          <span className="text-[11px] font-black text-[#0066FF]">Home</span>
         </button>
         <button className="flex flex-col items-center gap-1.5 opacity-40">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64748B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <rect x="3" y="4" width="18" height="11" rx="2" ry="2"/>
             <path d="M7 20h10"/><path d="M9 15v5"/><path d="M15 15v5"/>
           </svg>
-          <span className="text-[11px] font-bold text-[#64748B]">Tokens</span>
+          <span className="text-[11px] font-black text-[#64748B]">Tokens</span>
         </button>
         <button className="flex flex-col items-center gap-1.5 opacity-40">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64748B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
           </svg>
-          <span className="text-[11px] font-bold text-[#64748B]">History</span>
+          <span className="text-[11px] font-black text-[#64748B]">History</span>
         </button>
         <button className="flex flex-col items-center gap-1.5 opacity-40">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64748B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
           </svg>
-          <span className="text-[11px] font-bold text-[#64748B]">Profile</span>
+          <span className="text-[11px] font-black text-[#64748B]">Profile</span>
         </button>
       </div>
     </div>

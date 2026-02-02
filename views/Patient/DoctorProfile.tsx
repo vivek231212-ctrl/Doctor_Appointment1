@@ -28,11 +28,11 @@ export const DoctorProfile: React.FC<DoctorProfileProps> = ({ doctorId, onBack, 
             <path d="m15 18-6-6 6-6"/>
           </svg>
         </button>
-        <h1 className="text-[20px] font-bold text-[#111827]">Doctor Profile</h1>
+        <h1 className="text-[20px] font-black text-[#111827]">Doctor Profile</h1>
         <div className="w-8"></div>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto pb-40 hide-scrollbar">
         {/* Hero Section */}
         <div className="flex flex-col items-center pt-6 pb-8 px-6">
           <div className="relative">
@@ -55,7 +55,6 @@ export const DoctorProfile: React.FC<DoctorProfileProps> = ({ doctorId, onBack, 
           </p>
         </div>
 
-        {/* Thick Divider */}
         <div className="h-2 w-full bg-[#F8FAFC]" />
 
         {/* Stats Section */}
@@ -85,43 +84,11 @@ export const DoctorProfile: React.FC<DoctorProfileProps> = ({ doctorId, onBack, 
 
         <div className="h-2 w-full bg-[#F8FAFC]" />
 
-        {/* Fee Section */}
-        <div className="px-6 py-8">
-           <div className="flex justify-between items-center">
-             <div>
-               <h3 className="text-[18px] font-black text-[#111827]">Consultation Fee</h3>
-               <p className="text-[14px] text-[#94A3B8] font-bold mt-1">Includes digital prescription</p>
-             </div>
-             <div className="text-right">
-               <p className="text-[28px] font-black text-[#0066FF]">${doc.consultationFee.toFixed(2)}</p>
-               <p className="text-[14px] text-[#94A3B8] font-bold line-through mt-0.5">${doc.originalFee.toFixed(2)}</p>
-             </div>
-           </div>
-        </div>
-
-        <div className="h-2 w-full bg-[#F8FAFC]" />
-
         {/* About Section */}
         <div className="px-6 py-8">
           <h3 className="text-[18px] font-black text-[#111827] mb-4">About Doctor</h3>
           <p className="text-[#64748B] leading-relaxed text-[15px] font-semibold">
             {doc.about}
-          </p>
-        </div>
-
-        <div className="h-2 w-full bg-[#F8FAFC]" />
-
-        {/* Book Button Section */}
-        <div className="px-6 py-8 flex flex-col items-center">
-          <button 
-            onClick={onBook}
-            className="w-full bg-[#0066FF] text-white py-5 rounded-[22px] font-black text-[18px] flex items-center justify-center gap-3 shadow-xl shadow-blue-100 active:scale-[0.98] transition-all"
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M3 4h18a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm2 5v2h4V9H5zm10 0v2h4V9h-4zm-5 0v2h4V9h-4zM5 13v2h4v-2H5zm10 0v2h4v-2h-4zm-5 0v2h4v-2h-4z"/></svg>
-            Book Token #{nextTokenNum}
-          </button>
-          <p className="mt-4 text-[11px] font-black text-[#94A3B8] uppercase tracking-widest text-center">
-            Cancelable up to 2 hours before appointment
           </p>
         </div>
 
@@ -173,6 +140,20 @@ export const DoctorProfile: React.FC<DoctorProfileProps> = ({ doctorId, onBack, 
              </div>
           </div>
         </div>
+      </div>
+
+      {/* Fixed Bottom Action Area */}
+      <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-6 rounded-b-[48px] z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.03)] flex items-center justify-between gap-6">
+        <div className="shrink-0">
+          <p className="text-[#94A3B8] text-[10px] font-black uppercase tracking-widest mb-1">Consultation</p>
+          <p className="text-[26px] font-black text-[#0066FF]">${doc.consultationFee.toFixed(2)}</p>
+        </div>
+        <button 
+          onClick={onBook}
+          className="flex-1 bg-[#0066FF] text-white py-5 rounded-[22px] font-black text-[18px] flex items-center justify-center gap-3 shadow-xl shadow-blue-100 active:scale-[0.98] transition-all"
+        >
+          Book Token #{nextTokenNum}
+        </button>
       </div>
     </div>
   );

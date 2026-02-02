@@ -15,7 +15,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #e2e8f0; /* Darker neutral background for contrast */
+            background-color: #f8fafc; /* Neutral soft background */
             margin: 0;
             padding: 0;
             display: flex;
@@ -23,68 +23,70 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden; /* Prevent body scroll */
+            color: #1e293b;
         }
 
-        /* The App Frame */
+        /* The strictly fixed mobile container */
         #root {
             width: var(--app-width);
             height: var(--app-height);
             min-width: var(--app-width);
+            max-width: var(--app-width);
             min-height: var(--app-height);
+            max-height: var(--app-height);
             background-color: white;
-            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.25), 0 0 0 12px #ffffff;
-            border-radius: 44px;
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0,0,0,0.05);
+            border-radius: 48px; /* Modern phone corner radius */
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transform-origin: center;
-            /* Prevent any selection or text resizing issues */
-            -webkit-text-size-adjust: 100%;
             user-select: none;
+            -webkit-text-size-adjust: 100%;
         }
 
-        /* Scaling for smaller screens to ensure visibility without reflow */
-        @media (max-height: 900px), (max-width: 450px) {
+        /* Mock "Status Bar" area for visual realism */
+        #root::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #ffffff;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
+            z-index: 100;
+        }
+
+        /* Handle small desktop heights */
+        @media (max-height: 860px) {
             #root {
                 transform: scale(0.9);
+                transform-origin: center;
             }
         }
-        @media (max-height: 800px) {
+        @media (max-height: 780px) {
             #root {
                 transform: scale(0.8);
             }
         }
-        @media (max-height: 700px) {
-            #root {
-                transform: scale(0.7);
-            }
-        }
 
-        /* Prevent system zooming and text selection on interactive elements */
+        /* Prevent system zooming */
         * {
             touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Custom Scrollbar for the app's internal scroll - Hide it for clean look */
-        ::-webkit-scrollbar {
-            width: 0px;
-            background: transparent;
-        }
-
+        /* Clean scrolling for internal areas */
         .hide-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
-        }
-
-        /* Ensure images don't distort */
-        img {
-            -webkit-user-drag: none;
         }
     </style>
     <script type="importmap">
