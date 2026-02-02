@@ -15,48 +15,60 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f1f5f9;
+            background-color: #e2e8f0; /* Darker neutral background for contrast */
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden; /* Prevent body scroll, only app scrolls */
+            overflow: hidden; /* Prevent body scroll */
         }
 
+        /* The App Frame */
         #root {
             width: var(--app-width);
             height: var(--app-height);
             min-width: var(--app-width);
             min-height: var(--app-height);
             background-color: white;
-            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.15), 0 0 0 10px #ffffff;
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.25), 0 0 0 12px #ffffff;
             border-radius: 44px;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             transform-origin: center;
+            /* Prevent any selection or text resizing issues */
+            -webkit-text-size-adjust: 100%;
+            user-select: none;
         }
 
-        /* Container for scrollable content */
-        .app-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+        /* Scaling for smaller screens to ensure visibility without reflow */
+        @media (max-height: 900px), (max-width: 450px) {
+            #root {
+                transform: scale(0.9);
+            }
+        }
+        @media (max-height: 800px) {
+            #root {
+                transform: scale(0.8);
+            }
+        }
+        @media (max-height: 700px) {
+            #root {
+                transform: scale(0.7);
+            }
         }
 
-        /* Prevent system zooming and text selection */
+        /* Prevent system zooming and text selection on interactive elements */
         * {
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
         }
 
-        /* Custom Scrollbar for the app's internal scroll */
+        /* Custom Scrollbar for the app's internal scroll - Hide it for clean look */
         ::-webkit-scrollbar {
             width: 0px;
             background: transparent;
@@ -68,6 +80,11 @@
         }
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
+        }
+
+        /* Ensure images don't distort */
+        img {
+            -webkit-user-drag: none;
         }
     </style>
     <script type="importmap">

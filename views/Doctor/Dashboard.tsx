@@ -46,7 +46,7 @@ export const DoctorDashboard: React.FC = () => {
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-6 pb-32">
+      <div className="flex-1 overflow-y-auto px-6 pb-32 hide-scrollbar">
         {/* Live OPD Session Card */}
         <div className="mt-4 bg-[#EBF5FF] border border-[#BFDBFE] rounded-[24px] p-6 shadow-sm mb-8">
           <div className="flex justify-between items-start">
@@ -162,31 +162,12 @@ export const DoctorDashboard: React.FC = () => {
                 </button>
               </div>
             )}
-            {/* Fallback items to match design image exactly */}
-            {queue.length < 2 && (
-              <>
-                <div className="bg-[#F8FAFC] rounded-[20px] p-4 flex items-center justify-between border border-[#F1F5F9]">
-                  <div className="flex items-center gap-4">
-                    <span className="text-[16px] font-black text-[#94A3B8]">#31</span>
-                    <span className="text-[16px] font-bold text-[#1E293B]">Michael Chen</span>
-                  </div>
-                  <span className="text-[13px] text-[#94A3B8] font-bold">In 15 mins</span>
-                </div>
-                <div className="bg-[#F8FAFC] rounded-[20px] p-4 flex items-center justify-between border border-[#F1F5F9]">
-                  <div className="flex items-center gap-4">
-                    <span className="text-[16px] font-black text-[#94A3B8]">#32</span>
-                    <span className="text-[16px] font-bold text-[#1E293B]">Elena Rodriguez</span>
-                  </div>
-                  <span className="text-[13px] text-[#94A3B8] font-bold">In 25 mins</span>
-                </div>
-              </>
-            )}
           </div>
         </div>
       </div>
 
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#F1F5F9] h-[84px] px-8 flex items-center justify-between z-30">
+      {/* Bottom Navigation - Absolute to stay inside frame */}
+      <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-[#F1F5F9] h-[84px] px-8 flex items-center justify-between z-30 rounded-b-[44px]">
         <button className="flex flex-col items-center gap-1">
           <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center">
              <svg width="24" height="24" viewBox="0 0 24 24" fill="#1A73E8"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/></svg>
